@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PromotionEngine.Interfaces;
 using PromotionEngine.Model;
 
 namespace PromotionEngineTest
@@ -53,8 +54,11 @@ namespace PromotionEngineTest
             };
 
             //Act
+            IPromotionEngine promotionEngine = new PromotionEngine.PromotionEngine(priceList);
+            double result = promotionEngine.ApplyPromotion(cart);
 
             //Assert
+            Assert.AreEqual(100, result);
         }
     }
 }
