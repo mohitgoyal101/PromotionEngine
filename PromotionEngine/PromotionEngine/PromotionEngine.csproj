@@ -43,11 +43,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\Enums.cs" />
     <Compile Include="Interfaces\IPromotionEngine.cs" />
+    <Compile Include="Interfaces\IPromotionStrategy.cs" />
     <Compile Include="Model\Cart.cs" />
+    <Compile Include="Promotion.cs" />
     <Compile Include="Model\SKU.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="PromotionEngine.cs" />
+    <Compile Include="PromotionStrategy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

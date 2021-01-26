@@ -11,16 +11,24 @@ namespace PromotionEngine
     public class PromotionEngine : IPromotionEngine
     {
         private Dictionary<SKU, double> _priceList { get; set; }
+        private IPromotionStrategy _promotionStrategy = null;
+        private List<Promotion> availablePromotions = null;
 
-        public PromotionEngine(Dictionary<SKU, double> priceList)
+        public PromotionEngine(Dictionary<SKU, double> priceList, IPromotionStrategy promotionStrategy)
         {
             _priceList = priceList;
+            this._promotionStrategy = promotionStrategy;
         }
 
         public double ApplyPromotion(Cart cart)
         {
             double total = 0;
-           
+            availablePromotions = this._promotionStrategy.GetActivePromotion();
+            foreach (var availablePromotion in availablePromotions)
+            {
+                total = total + availablePromotion.CalculatePrice(cart.CartSKUs, _priceList);
+            }
+
             //Calculate Actual Price For Items 
             foreach (CartSKU cartSKU in cart.CartSKUs.Where(x => x.IsPromotionApplied == false))
             {

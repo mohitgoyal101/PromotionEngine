@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PromotionEngine;
 using PromotionEngine.Interfaces;
 using PromotionEngine.Model;
 
@@ -54,11 +55,45 @@ namespace PromotionEngineTest
             };
 
             //Act
-            IPromotionEngine promotionEngine = new PromotionEngine.PromotionEngine(priceList);
+            IPromotionEngine promotionEngine = new PromotionEngine.PromotionEngine(priceList, new PromotionStrategy());
             double result = promotionEngine.ApplyPromotion(cart);
 
             //Assert
             Assert.AreEqual(100, result);
+        }
+        
+        [TestMethod]
+        public void Scenario2_ApplyPromotion_ReturnTotal()
+        {
+            //Prepare
+            Cart cart = new Cart()
+            {
+                CartSKUs = new List<CartSKU>()
+                {
+                    new CartSKU()
+                    {
+                        Id="A",
+                        Quantity=5
+                    },
+                     new CartSKU()
+                    {
+                        Id="B",
+                        Quantity=5
+                    },
+                      new CartSKU()
+                    {
+                        Id="C",
+                        Quantity=1
+                    },
+                }
+            };
+
+            //Act
+            IPromotionEngine promotionEngine = new PromotionEngine.PromotionEngine(priceList, new PromotionStrategy());
+            double result = promotionEngine.ApplyPromotion(cart);
+
+            //Assert
+            Assert.AreEqual(370, result);
         }
     }
 }
