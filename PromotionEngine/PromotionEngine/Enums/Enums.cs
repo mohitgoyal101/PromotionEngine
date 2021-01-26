@@ -9,5 +9,7 @@ namespace PromotionEngine.Enums
     public enum PromotionType
     {
         Bulk,
+        Combo
+        //Percent
     }
 }

@@ -12,7 +12,7 @@ namespace PromotionEngine
     {
         private Dictionary<SKU, double> _priceList { get; set; }
         private IPromotionStrategy _promotionStrategy = null;
-        private List<Promotion> availablePromotions = null;
+        private List<Promotion> lstActivePromotions = null;
 
         public PromotionEngine(Dictionary<SKU, double> priceList, IPromotionStrategy promotionStrategy)
         {
@@ -23,8 +23,8 @@ namespace PromotionEngine
         public double ApplyPromotion(Cart cart)
         {
             double total = 0;
-            availablePromotions = this._promotionStrategy.GetActivePromotion();
-            foreach (var availablePromotion in availablePromotions)
+            lstActivePromotions = this._promotionStrategy.GetActivePromotion();
+            foreach (var availablePromotion in lstActivePromotions)
             {
                 total = total + availablePromotion.CalculatePrice(cart.CartSKUs, _priceList);
             }

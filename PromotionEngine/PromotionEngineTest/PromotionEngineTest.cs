@@ -95,5 +95,44 @@ namespace PromotionEngineTest
             //Assert
             Assert.AreEqual(370, result);
         }
+
+        [TestMethod]
+        public void Scenario3_ApplyPromotion_ReturnTotal()
+        {
+            //Prepare
+            Cart cart = new Cart()
+            {
+                CartSKUs = new List<CartSKU>()
+                {
+                    new CartSKU()
+                    {
+                        Id="A",
+                        Quantity=3
+                    },
+                     new CartSKU()
+                    {
+                        Id="B",
+                        Quantity=5
+                    },
+                      new CartSKU()
+                    {
+                        Id="C",
+                        Quantity=1
+                    },
+                        new CartSKU()
+                    {
+                        Id="D",
+                        Quantity=1
+                    },
+                }
+            };
+
+            //Act
+            IPromotionEngine promotionEngine = new PromotionEngine.PromotionEngine(priceList, new PromotionStrategy());
+            double result = promotionEngine.ApplyPromotion(cart);
+
+            //Assert
+            Assert.AreEqual(280, result);
+        }
     }
 }

@@ -43,7 +43,22 @@ namespace PromotionEngine
                 MinQuantity = 2
             };
             promotions.Add(bulkPromotionB);
-            
+
+            Promotion comboPromotionCD = new ComboPromotion()
+            {
+                PromotionType = PromotionType.Combo,
+                ApplicablePrice = 30,
+                SKU1 = new SKU()
+                {
+                    Id = "C"
+                },
+                SKU2 = new SKU()
+                {
+                    Id = "D"
+                }
+            };
+            promotions.Add(comboPromotionCD);
+
             return promotions;
         }
     }
